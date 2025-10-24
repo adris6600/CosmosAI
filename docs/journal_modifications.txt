@@ -1,0 +1,24 @@
+## Journal des Modifications - Mon Soleil V-0.4.5
+
+### 30 juillet 2024 - Gemini
+- **Refactorisation initiale** : Création du journal de modifications pour tracer les changements
+- **Refactorisation de Sun.jsx** : Mise à jour pour utiliser les nouvelles constantes et amélioration de la structure
+- **Mise à jour de constants.js** : Ajout de nouvelles constantes pour la configuration du soleil
+- **Nettoyage de package.json** : Stabilisation des entrées et suppression des dépendances inutiles
+
+### 30 juillet 2024 - Gemini (Transition vers architecture data-driven)
+- **Création d'EditorPanel.jsx** : Nouveau panneau d'édition dynamique utilisant Leva pour contrôler les propriétés des corps célestes
+- **Modification d'App.jsx** : Intégration du panneau d'édition dans l'application principale
+- **Mise à jour de Camera.jsx** : Transition vers l'utilisation du store Zustand pour la désélection des corps
+- **Suppression de SunContext.jsx** : Élimination du contexte obsolète au profit du store Zustand
+- **Correction d'EditorPanel.jsx** : Résolution de l'erreur d'ordre des hooks React en s'assurant que useControls est toujours appelé
+- **Mise à jour de Sun.jsx** : Transition complète vers le système de store Zustand avec gestion de la sélection
+
+### 30 juillet 2024 - Claude (Restructuration du projet)
+- **Centralisation du code source** : Déplacement de tous les composants vers /src/components
+- **Réorganisation des dossiers** : Déplacement de /assets, /context, /data, /shaders vers /src
+- **Renommage /src/app vers /src/state** : Clarification de la structure pour la gestion d'état
+- **Mise à jour de vite.config.js** : Configuration de l'alias '@' pour pointer vers /src
+- **Mise à jour d'index.html** : Correction du chemin vers main.jsx
+- **Correction de tous les chemins d'import** : Mise à jour de tous les imports pour refléter la nouvelle structure
+- **Nettoyage des dossiers obsolètes** : Suppression des dossiers vides après restructuration
