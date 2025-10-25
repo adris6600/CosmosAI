@@ -703,7 +703,7 @@ export const paramConfig = {
     label: 'Fréquence Granulation',
     type: 'range',
     min: 0.5,
-    max: 8.0,
+    max: 12.0,
     step: 0.1
   },
   granulationAmplitude: {
@@ -768,6 +768,17 @@ export const paramConfig = {
   },
   color4: {
     label: 'Couleur Froide',
+    type: 'color'
+  },
+  limbPower: {
+    label: 'Puissance du Limbe',
+    type: 'range',
+    min: 0.5,
+    max: 6.0,
+    step: 0.1
+  },
+  rimColor: {
+    label: 'Couleur du Limbe',
     type: 'color'
   },
   noiseMode: {
@@ -887,7 +898,9 @@ export const categories = {
       'coronaFalloff',
       'temperatureVariationIntensity',
       'color3',
-      'color4', 
+      'color4',
+      'limbPower',
+      'rimColor', 
       'noiseMode',
       'noiseMix',
       'noiseIntensity1',
@@ -997,7 +1010,7 @@ export const parameterDescriptions = {
   density: "Densité de l'objet en g/cm³ ou kg/m³.",
   surfaceTemperature: "Température de surface de l'objet en Kelvin (K).",
   luminosity: "Luminosité en multiples de la luminosité solaire (L☉).",
-  velocity: "Vitesse de déplacement de l'objet dans l'espace.",
+  velocity: "Contrôle la norme du vecteur vitesse; conserve la direction existante pour une valeur scalaire.",
   rotationPeriod: "Période de rotation de l'objet sur lui-même en jours.",
   age: "Âge de l'objet en mégaannées ou gigaannées.",
   surfaceGravityKmDescription: "Gravité à la surface de l'objet en km/s².",
@@ -1157,6 +1170,8 @@ export const parameterDescriptions = {
   temperatureVariationIntensity: "Amplitude des variations de température de surface.",
   color3: "Couleur tertiaire pour les zones chaudes et les éruptions solaires.",
   color4: "Couleur quaternaire pour les zones froides et les taches solaires.",
+  limbPower: "Puissance du halo au limbe; plus élevé accentue l'effet d’assombrissement.",
+  rimColor: "Couleur du halo lumineux au limbe.",
   noiseMode: "Sélectionne le type de bruit à utiliser : Bruit 1 (original), Bruit 2 (avancé), ou Combiné (mélange des deux).",
   noiseMix: "Contrôle le mélange entre les deux types de bruit quand le mode 'Combiné' est sélectionné (0 = Bruit 1, 1 = Bruit 2).",
   noiseIntensity1: "Intensité du premier type de bruit. Affecte la force des effets du bruit original.",

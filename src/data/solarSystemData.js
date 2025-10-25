@@ -56,6 +56,8 @@ export const solarSystemData = [
         temperatureVariationIntensity: 0.3, // Corrigé le nom et augmenté
         color3: '#FFAA00', // Orange plus chaud
         color4: '#FF4400', // Rouge plus intense
+        limbPower: 2.0, // Puissance du limbe (halo)
+        rimColor: '#FFC96B', // Couleur du limbe
         
         // --- Nouveaux Paramètres de Sélection de Bruit ---
         noiseMode: 2, // 0 = Bruit 1, 1 = Bruit 2, 2 = Combiné (plus intéressant visuellement)

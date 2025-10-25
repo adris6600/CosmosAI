@@ -14,6 +14,8 @@ const headerStyle = {
   borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
   cursor: 'move',
   margin: '0',
+  userSelect: 'none',
+  touchAction: 'none',
 };
 
 const contentStyle = {
@@ -101,17 +103,17 @@ export default function TimeControls() {
       {isPanelVisible && (
         <div ref={panelRef} style={panelStyle} aria-label="Panneau de contrôle du temps">
           {/* Poignées de redimensionnement */}
-          <div style={{ ...resizeHandleStyle, top: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'top')} />
-          <div style={{ ...resizeHandleStyle, bottom: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'bottom')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'right')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'nw-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'top left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'ne-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'top right')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'sw-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'bottom left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'se-resize' }} onMouseDown={(e) => handleResizeMouseDown(e, 'bottom right')} />
+          <div style={{ ...resizeHandleStyle, top: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'top')} />
+          <div style={{ ...resizeHandleStyle, bottom: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'bottom')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'right')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'nw-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'top left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'ne-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'top right')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'sw-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'bottom left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'se-resize' }} onPointerDown={(e) => handleResizeMouseDown(e, 'bottom right')} />
 
           {/* En-tête draggable */}
-          <div style={headerStyle} onMouseDown={handleDragMouseDown} onPointerDown={handleDragMouseDown}>
+          <div style={headerStyle} onPointerDown={handleDragMouseDown}>
             Contrôle du Temps
           </div>
 

@@ -88,22 +88,16 @@ export function useResizableAndDraggablePanel({ initialSize, initialPosition, mi
       const handleGlobalMouseMove = (e) => handleMouseMove(e);
       const handleGlobalMouseUp = () => handleMouseUp();
       
-      document.addEventListener('mousemove', handleGlobalMouseMove, { passive: false });
-      document.addEventListener('mouseup', handleGlobalMouseUp);
       document.addEventListener('pointermove', handleGlobalMouseMove, { passive: false });
       document.addEventListener('pointerup', handleGlobalMouseUp);
       
       document.body.style.userSelect = 'none';
-      document.body.style.pointerEvents = 'none';
       
       return () => {
-        document.removeEventListener('mousemove', handleGlobalMouseMove);
-        document.removeEventListener('mouseup', handleGlobalMouseUp);
         document.removeEventListener('pointermove', handleGlobalMouseMove);
         document.removeEventListener('pointerup', handleGlobalMouseUp);
         
         document.body.style.userSelect = '';
-        document.body.style.pointerEvents = '';
       };
     }
   }, [isResizing, isDragging, handleMouseMove, handleMouseUp]);

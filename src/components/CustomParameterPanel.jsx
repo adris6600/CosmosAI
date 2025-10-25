@@ -199,7 +199,7 @@ export default function CustomParameterPanel() {
       case 'zeroVel':
         // Remettre la vélocité à zéro
         if (selectedBody) {
-          updateBodyProperty(selectedBody.id, 'velocity', 0);
+          updateBodyProperty(selectedBody.id, 'velocity', [0, 0, 0]);
         }
         break;
       case 'synchronousRotation':
@@ -294,6 +294,8 @@ export default function CustomParameterPanel() {
     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     cursor: 'move',
     margin: '0',
+    userSelect: 'none',
+    touchAction: 'none'
   };
 
   const contentStyle = {
@@ -430,16 +432,16 @@ export default function CustomParameterPanel() {
 
       {isPanelVisible && (
         <div ref={newPanelRef} style={newPanelStyle}>
-          <div style={{ ...resizeHandleStyle, top: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'top')} />
-          <div style={{ ...resizeHandleStyle, bottom: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'bottom')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'right')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'nw-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'top left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'ne-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'top right')} />
-          <div style={{ ...resizeHandleStyle, left: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'sw-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'bottom left')} />
-          <div style={{ ...resizeHandleStyle, right: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'se-resize' }} onMouseDown={(e) => newHandleResizeMouseDown(e, 'bottom right')} />
+          <div style={{ ...resizeHandleStyle, top: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'top')} />
+          <div style={{ ...resizeHandleStyle, bottom: '-2px', left: '8px', right: '8px', height: '4px', cursor: 'ns-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'bottom')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', top: '8px', bottom: '8px', width: '4px', cursor: 'ew-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'right')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'nw-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'top left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', top: '-2px', width: '8px', height: '8px', cursor: 'ne-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'top right')} />
+          <div style={{ ...resizeHandleStyle, left: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'sw-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'bottom left')} />
+          <div style={{ ...resizeHandleStyle, right: '-2px', bottom: '-2px', width: '8px', height: '8px', cursor: 'se-resize' }} onPointerDown={(e) => newHandleResizeMouseDown(e, 'bottom right')} />
 
-          <div style={headerStyle} onMouseDown={newHandleDragMouseDown} onPointerDown={newHandleDragMouseDown}>
+          <div style={headerStyle} onPointerDown={newHandleDragMouseDown}>
             Panneau de Configuration
           </div>
       

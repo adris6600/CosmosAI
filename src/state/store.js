@@ -55,11 +55,34 @@ export const useStore = create((set, get) => ({
   },
 
   updateBodyProperty: (id, property, value) => set((state) => ({
-    celestialBodies: state.celestialBodies.map(body =>
-      body.id === id
-        ? { ...body, [property]: value }
-        : body
-    )
+    celestialBodies: state.celestialBodies.map(body => {
+      if (body.id !== id) return body;
+      if (property === 'velocity') {
+        const prev = Array.isArray(body.velocity) && body.velocity.length === 3
+          ? body.velocity
+          : [0, 0, 0];
+
+        let newVel = prev;
+        if (Array.isArray(value) && value.length === 3) {
+          newVel = value.map(n => (Number.isFinite(n) ? n : 0));
+        } else if (value && typeof value === 'object' && 'x' in value && 'y' in value && 'z' in value) {
+          newVel = [value.x, value.y, value.z].map(n => (Number.isFinite(n) ? n : 0));
+        } else if (Number.isFinite(value)) {
+          if (value === 0) {
+            newVel = [0, 0, 0];
+          } else {
+            const mag = Math.sqrt(prev[0] * prev[0] + prev[1] * prev[1] + prev[2] * prev[2]);
+            const dir = mag > 0 ? [prev[0] / mag, prev[1] / mag, prev[2] / mag] : [1, 0, 0];
+            newVel = dir.map(c => c * value);
+          }
+        } else {
+          // Valeur invalide: conserver l'ancienne vélocité
+          newVel = prev;
+        }
+        return { ...body, velocity: newVel };
+      }
+      return { ...body, [property]: value };
+    })
   })),
 
   addCelestialBody: () => set((state) => {
@@ -99,6 +122,8 @@ export const useStore = create((set, get) => ({
       temperatureVariation: 0.1,
       color3: '#FFA500', // Couleur chaude (orange)
       color4: '#CC3300', // Couleur froide (rouge sombre)
+      limbPower: 2.0, // Puissance du limbe
+      rimColor: '#FFC96B', // Couleur du limbe
       // Nouveaux paramètres de sélection de bruit
       noiseMode: 0, // 0 = Bruit 1, 1 = Bruit 2, 2 = Combiné
       noiseMix: 0.5, // Mélange entre les deux bruits (0-1)
