@@ -1,5 +1,5 @@
 // Imports React et hooks nécessaires pour la gestion d'état et des références
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 // Import du store Zustand pour la gestion globale de l'état
 import { useStore } from '../state/store.js';
 // Imports des composants UI spécialisés pour différents types de paramètres
@@ -10,6 +10,7 @@ import ParameterSelect from './ui/ParameterSelect';
 import ParameterCheckbox from './ui/ParameterCheckbox';
 import ParameterText from './ui/ParameterText';
 import ParameterColor from './ui/ParameterColor';
+import SelectedBodySummary from './SelectedBodySummary';
 // Import de la configuration des paramètres UI
 import { paramConfig, categories, parameterDescriptions } from '../config/uiConfig.js';
 // Import du hook personnalisé pour le redimensionnement et le déplacement
@@ -446,6 +447,8 @@ export default function CustomParameterPanel() {
           </div>
       
           <div style={contentStyle}>
+            <SelectedBodySummary />
+
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '16px', padding: '8px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px' }}>
               {Object.entries(categories).map(([key, category]) => (
                 <button key={key} style={activeCategory === key ? activeCategoryButtonStyle : categoryButtonStyle} onClick={() => setActiveCategory(key)} onMouseEnter={(e) => { if (activeCategory !== key) e.target.style.background = 'rgba(255, 255, 255, 0.2)'; }} onMouseLeave={(e) => { if (activeCategory !== key) e.target.style.background = 'rgba(255, 255, 255, 0.1)'; }}>

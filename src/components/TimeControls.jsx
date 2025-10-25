@@ -86,6 +86,26 @@ export default function TimeControls() {
   const magDays = Math.abs(speedDaysPerSec);
   const speedLabel = useMemo(() => `${speedDaysPerSec.toFixed(2)} jour/s`, [speedDaysPerSec]);
 
+  const formattedTime = useMemo(() => {
+    const sign = time < 0 ? '-' : '';
+    let remaining = Math.abs(time);
+
+    const days = Math.floor(remaining / 86400);
+    remaining -= days * 86400;
+
+    const hours = Math.floor(remaining / 3600);
+    remaining -= hours * 3600;
+
+    const minutes = Math.floor(remaining / 60);
+    remaining -= minutes * 60;
+
+    const seconds = Math.floor(remaining);
+
+    return `${sign}${days} j ${hours.toString().padStart(2, '0')} h ${minutes
+      .toString()
+      .padStart(2, '0')} m ${seconds.toString().padStart(2, '0')} s`;
+  }, [time]);
+
   return (
     <>
       {/* Bouton de bascule du panneau temps */}
@@ -188,6 +208,7 @@ export default function TimeControls() {
                   Aller à 0 s
                 </button>
               </div>
+              <div className="help-text">Format lisible&nbsp;: {formattedTime}</div>
             </div>
           </div>
         </div>
