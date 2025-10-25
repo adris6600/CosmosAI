@@ -1,7 +1,7 @@
 // src/components/CelestialBody.jsx
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useFrame, extend } from '@react-three/fiber';
-import { shaderMaterial, Select } from '@react-three/drei';
+import { shaderMaterial, Select, Line } from '@react-three/drei';
 import { Color } from 'three';
 import { useCamera } from '../context/Camera';
 import { useStore } from '../state/store.js';
@@ -30,6 +30,31 @@ const CelestialBody = (props) => {
   const time = useStore((state) => state.time);
   const materialRef = useRef();
 
+  const velocityVector = useMemo(() => {
+    if (!props.velocity || props.velocity.length !== 3) {
+      return null;
+    }
+
+    const [vx, vy, vz] = props.velocity;
+    const magnitude = Math.hypot(vx, vy, vz);
+    if (!Number.isFinite(magnitude) || magnitude <= 1e-6) {
+      return null;
+    }
+
+    const maxLength = 30;
+    const minLength = 1.5;
+    const clampedLength = Math.min(Math.max(magnitude * 0.75, minLength), maxLength);
+    const scale = clampedLength / magnitude;
+
+    return {
+      points: [
+        [0, 0, 0],
+        [vx * scale, vy * scale, vz * scale]
+      ],
+      magnitude
+    };
+  }, [props.velocity]);
+
   const handleSelect = (event) => {
     event.stopPropagation();
     handleFocus(event);
@@ -56,6 +81,16 @@ const CelestialBody = (props) => {
             <sunMaterial ref={materialRef} attach="material" />
           </mesh>
         </Select>
+        {velocityVector && (
+          <Line
+            points={velocityVector.points}
+            color={isSelected ? '#00FFFF' : '#AAAAAA'}
+            lineWidth={isSelected ? 2.5 : 1.5}
+            dashed
+            dashSize={0.25}
+            gapSize={0.15}
+          />
+        )}
       </group>
       <pointLight intensity={props.pointLightIntensity} color="#FFD700" />
     </group>
